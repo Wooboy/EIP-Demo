@@ -173,10 +173,20 @@
                     console.log('proc group: ' + (i));
                     let prevGroup = document.getElementById('group' + (i-1)).querySelectorAll('input');
                     let currentGroup = document.getElementById('group' + i).querySelectorAll('input');
-                    if(currentGroup[3].checked){
+                    if(currentGroup[3].checked && !currentGroup[1].disabled){
                         console.log('constraint: '+currentGroup[3].checked);
                         console.log('group' + i + ": " + currentGroup[4].value);
-                        currentGroup[1].value = prevGroup[1].valueAsDate.addDays(currentGroup[4].valueAsNumber)
+                        currentGroup[1].value = (new Date(prevGroup[1].valueAsDate)).addDays(currentGroup[4].valueAsNumber)
+                    }
+                }
+            }
+            // 檢查關聯與日期
+            group = 0;
+            for (let i = group; i< groupcount; i++){
+                let currentGroup = document.getElementById('group' + (i+1)).querySelectorAll('input');
+                if(!currentGroup[1].disabled){
+                    if(!currentGroup[2].readOnly){
+                        currentGroup[0].validationMessage = (new Date(currentGroup[1].valueAsDate)).addDays(currentGroup[2].valueAsNumber * -1)
                     }
                 }
             }
