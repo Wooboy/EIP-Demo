@@ -176,7 +176,7 @@
                     if(currentGroup[3].checked && !currentGroup[1].disabled){
                         console.log('constraint: '+currentGroup[3].checked);
                         console.log('group' + i + ": " + currentGroup[4].value);
-                        currentGroup[1].value = (new Date(prevGroup[1].valueAsDate)).addDays(currentGroup[4].valueAsNumber)
+                        currentGroup[1].value = (new Date(prevGroup[1].valueAsDate)).addDays(currentGroup[4].valueAsNumber).toISOString().substring(0, 10);
                     }
                 }
             }
