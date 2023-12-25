@@ -10,10 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <script href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     <style>
-        input.form-control {
-            width: auto;
-        }
-
         table {
             table-layout: fixed;
         }
@@ -40,8 +36,8 @@
                         <tr>
                             <th width="30px">完成</th>
                             <th width="300px">內容</th>
-                            <th width="150px">開始</th>
-                            <th width="150px">結束</th>
+                            <th width="160px">開始</th>
+                            <th width="160px">結束</th>
                             <th width="100px">工期</th>
                             <th width="100px">前項關聯</th>
                             <th width="400px">其它</th>
@@ -71,8 +67,7 @@
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" disabled />
-                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
-                                    value="7" />
+                                <input type="number" class="form-control constraint" disabled />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -349,6 +344,13 @@
             date.setDate(date.getDate() + days);
             return date;
         }
+        function checkConstrainDay() {
+            for (let i = 1; i < groupcount; i++) {
+                let prevGroup = document.getElementById('group' + i).querySelectorAll('input');
+                let currentGroup = document.getElementById('group' + (i + 1)).querySelectorAll('input');
+                currentGroup[5].value = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate) - 1);
+            }
+        }
         function DayDiff(date1, date2) {
             let result = (date1 - date2) / 86400000 + 1;
             return result;
@@ -380,31 +382,23 @@
             let row = sender.closest('tr');
             // 取得目前所在組別
             let group = parseInt(row.id.substring(5));
-            //console.log(' ');
-            //console.log('current group: ' + group);
             // 如果目前組別小於全部組別數，移動後續工作結束日期
             if (group < groupcount) {
                 for (let i = group + 1; i <= groupcount; i++) {
-                    //console.log('proc group: ' + (i));
                     let prevGroup = document.getElementById('group' + (i - 1)).querySelectorAll('input');
                     let currentGroup = document.getElementById('group' + i).querySelectorAll('input');
                     // 檢查是否啟用關聯，且結束日未停用(結束日停用表示該工作已完成)
                     if (currentGroup[4].checked && !currentGroup[2].disabled) {
-                        //console.log('constraint: ' + currentGroup[3].checked);
-                        //console.log('group' + i + ": " + currentGroup[4].value);
                         currentGroup[2].value = (new Date(prevGroup[2].valueAsDate))
                             .addDays(currentGroup[5].valueAsNumber)
                             .toISOString()
                             .substring(0, 10);
                     }
                     //currentGroup[5].value =  DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate);
-                    console.log(" ");
-                    console.log("currentGroup: " + i);
-                    console.log("prev: " + prevGroup[2].value);
-                    console.log("curr: " + currentGroup[2].value);
-                    currentGroup[5].value = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate)-1);
+                    //currentGroup[5].value = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate)-1);
                 }
             }
+            checkConstrainDay();
             // 依結束日期重新推算開始日期
             group = 0;
             for (let i = group; i < groupcount; i++) {
@@ -428,12 +422,16 @@
             inputs[1].disabled = sender.checked || inputs[3].readOnly;
             inputs[2].disabled = sender.checked;
             inputs[3].disabled = sender.checked;
-            inputs[4].disabled = sender.checked;
-            inputs[4].checked = !sender.checked;
-            inputs[5].disabled = sender.checked;
+            // 第一項工作不可設定前項關聯
+            if (row.id !== 'group1') {
+                inputs[4].disabled = sender.checked;
+                inputs[4].checked = !sender.checked;
+                inputs[5].disabled = sender.checked;
+            }
             inputs[7].style.display = (sender.checked) ? "none" : "inline-block";
             inputs[8].style.display = (sender.checked) ? "none" : "inline-block";
         }
+        checkConstrainDay();
 
     </script>
 </body>
