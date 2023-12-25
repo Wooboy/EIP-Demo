@@ -332,6 +332,11 @@
                         <li>已完成工作不套用連動規則</li>
                         <li>前面的工作不套用連動規則(只調整後續工作)</li>
                     </ul>
+                    <li>儲存工作規則</li>
+                    <ul>
+                        <li>需要記住原始工作日期，如果工作有異動，則個別執行存檔程序</li>
+                        <li>若審查列為重審項目，需執行重審存檔程序</li>
+                    </ul>
                 </ul>
             </div>
         </div>
@@ -345,16 +350,13 @@
             return date;
         }
         function DayDiff(date1, date2) {
-            let result = Math.abs((date1 - date2) / 86400000) + 1;
+            let result = (date1 - date2) / 86400000 + 1;
             return result;
         }
         function changeValue(sender) {
             let row = sender.closest('tr');
             let inputs = row.querySelectorAll('input');
-            if (inputs[3].readOnly) {
-                // 如果工期唯讀，則開始日等於結束日
-                inputs[1].value = sender.value;
-            } else if (sender.className.includes('startDate')) {
+            if (sender.className.includes('startDate')) {
                 // 調整開始日時，依工期，推算結束日
                 inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays(inputs[3].valueAsNumber - 1).toISOString().substring(0, 10);
             } else if (sender.className.includes('endDate')) {
@@ -365,6 +367,7 @@
                 inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
             } else if (sender.className.includes('constraint')) {
                 // 調整關聯時，推算結束日
+                console.log('hi');
                 let dt = (document.getElementById('group' + (parseInt(row.id.substring(5)) - 1)).querySelectorAll('input')[2].valueAsDate);
                 inputs[2].value = dt.addDays(parseInt(sender.value)).toISOString().substring(0, 10);
             } else {
@@ -394,6 +397,12 @@
                             .toISOString()
                             .substring(0, 10);
                     }
+                    //currentGroup[5].value =  DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate);
+                    console.log(" ");
+                    console.log("currentGroup: " + i);
+                    console.log("prev: " + prevGroup[2].value);
+                    console.log("curr: " + currentGroup[2].value);
+                    currentGroup[5].value = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate)-1);
                 }
             }
             // 依結束日期重新推算開始日期
@@ -405,6 +414,9 @@
                     .toISOString()
                     .substring(0, 10);
             }
+        }
+        function calcContraintDay() {
+
         }
         function toggleConstraint(sender) {
             let inputs = sender.closest('tr').querySelectorAll('input');
