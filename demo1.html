@@ -59,19 +59,20 @@
                                 &nbsp;[審查] 建照掛號
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-01-23" onchange="changefunc(this)"
+                                <input type="date" class="startDate" value="2024-01-23" onchange="changeValue(this)"
                                     disabled />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-01-23" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-01-23" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
                                     min="1" readonly />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" disabled />
-                                <input type="number" class="form-control constraint" disabled />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -90,19 +91,20 @@
                                 &nbsp;[品管] 建照自主檢查表 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-08-13" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-08-13" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-08-22" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-08-22" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
-                                    min="1" />
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="15" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -121,19 +123,20 @@
                                 &nbsp;[品管] 建照圖初版提交 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-08-28" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-08-28" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-09-06" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-09-06" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
-                                    min="1" />
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="15" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -152,19 +155,20 @@
                                 &nbsp;[品管] 建照圖修正版提交 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-09-12" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-09-12" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-09-21" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-09-21" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
-                                    min="1" />
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="15" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -183,19 +187,20 @@
                                 &nbsp;[品管] 建照圖定稿版提交 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-09-27" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-09-27" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-10-06" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-10-06" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
-                                    min="1" />
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="15" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -214,20 +219,21 @@
                                 &nbsp;[審查] 建照圖審
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-10-13" onchange="changefunc(this)"
+                                <input type="date" class="startDate" value="2024-10-13" onchange="changeValue(this)"
                                     disabled />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-10-13" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-10-13" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
                                     min="1" readonly />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="7" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -246,20 +252,21 @@
                                 &nbsp;[審查] 建照核准
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-10-20" onchange="changefunc(this)"
+                                <input type="date" class="startDate" value="2024-10-20" onchange="changeValue(this)"
                                     disabled />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-10-20" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" value="2024-10-20" onchange="changeValue(this)" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
                                     min="1" readonly />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="7" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -278,20 +285,21 @@
                                 &nbsp;[審查] 建照領照
                             </td>
                             <td>
-                                <input type="date" class="startDate" onchange="changefunc(this)" value="2024-10-27"
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-10-27"
                                     disabled />
                             </td>
                             <td>
-                                <input type="date" class="endDate" onchange="changefunc(this)" value="2024-10-27" />
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-10-27" />
                             </td>
                             <td>
-                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
                                     min="1" readonly />
                             </td>
                             <td style="display: flex;">
                                 <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
                                     checked />
-                                <input type="number" class="form-control constraint" value="7" />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -340,7 +348,7 @@
             let result = Math.abs((date1 - date2) / 86400000) + 1;
             return result;
         }
-        function changefunc(sender) {
+        function changeValue(sender) {
             let row = sender.closest('tr');
             let inputs = row.querySelectorAll('input');
             if (inputs[3].readOnly) {
@@ -354,8 +362,11 @@
                 inputs[3].value = DayDiff(inputs[1].valueAsDate, inputs[1].valueAsDate);
             } else if (sender.className.includes('workday')) {
                 // 調整工期時，開始日不變，推算結束日
-                let dt = new Date(inputs[1].valueAsDate);
-                inputs[2].value = dt.addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
+                inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
+            } else if (sender.className.includes('constraint')) {
+                // 調整關聯時，推算結束日
+                let dt = (document.getElementById('group' + (parseInt(row.id.substring(5)) - 1)).querySelectorAll('input')[2].valueAsDate);
+                inputs[2].value = dt.addDays(parseInt(sender.value)).toISOString().substring(0, 10);
             } else {
 
             }
