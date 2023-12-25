@@ -18,8 +18,12 @@
             table-layout: fixed;
         }
 
-        .workday {
-            width: 60px;
+        input.workday {
+            width: 70px;
+        }
+
+        input.constraint {
+            width: 70px;
         }
     </style>
 </head>
@@ -34,6 +38,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th width="30px">完成</th>
                             <th width="300px">內容</th>
                             <th width="150px">開始</th>
                             <th width="150px">結束</th>
@@ -45,10 +50,13 @@
                     <tbody>
                         <tr id="group1">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照掛號
+                                &nbsp;[審查] 建照掛號
                             </td>
                             <td>
                                 <input type="date" class="startDate" value="2024-01-23" onchange="changefunc(this)"
@@ -58,12 +66,12 @@
                                 <input type="date" class="endDate" value="2024-01-23" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="1"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                    min="1" readonly />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" disabled />
-                                <input class="form-control" type="number" style="width: 70px;" disabled />
+                                <input type="checkbox" class="form-check-input" disabled />
+                                <input type="number" class="form-control constraint" disabled />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -73,24 +81,28 @@
                         </tr>
                         <tr id="group2">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照自主檢查表 (法務)
+                                &nbsp;[品管] 建照自主檢查表 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-07-24" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-08-13" onchange="changefunc(this)" />
                             </td>
                             <td>
                                 <input type="date" class="endDate" value="2024-08-22" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="30"
-                                    onchange="changefunc(this)" min="1" />
+                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
+                                    min="1" />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control workday" type="number" value="15" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -100,24 +112,28 @@
                         </tr>
                         <tr id="group3">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照圖初版提交 (法務)
+                                &nbsp;[品管] 建照圖初版提交 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-08-23" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-08-28" onchange="changefunc(this)" />
                             </td>
                             <td>
                                 <input type="date" class="endDate" value="2024-09-06" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="15"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
+                                    min="1" />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control" type="number" value="15" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -127,24 +143,28 @@
                         </tr>
                         <tr id="group4">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照圖修正版提交 (法務)
+                                &nbsp;[品管] 建照圖修正版提交 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-09-07" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-09-12" onchange="changefunc(this)" />
                             </td>
                             <td>
                                 <input type="date" class="endDate" value="2024-09-21" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="15"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
+                                    min="1" />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control" type="number" value="15" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -154,24 +174,28 @@
                         </tr>
                         <tr id="group5">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照圖定稿版提交 (法務)
+                                &nbsp;[品管] 建照圖定稿版提交 (法務)
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-09-22" onchange="changefunc(this)" />
+                                <input type="date" class="startDate" value="2024-09-27" onchange="changefunc(this)" />
                             </td>
                             <td>
                                 <input type="date" class="endDate" value="2024-10-06" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="15"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="10" onchange="changefunc(this)"
+                                    min="1" />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control" type="number" value="15" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="15" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -181,10 +205,13 @@
                         </tr>
                         <tr id="group6">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照圖審
+                                &nbsp;[審查] 建照圖審
                             </td>
                             <td>
                                 <input type="date" class="startDate" value="2024-10-13" onchange="changefunc(this)"
@@ -194,12 +221,13 @@
                                 <input type="date" class="endDate" value="2024-10-13" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="1"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                    min="1" readonly />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control" type="number" value="7" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -209,10 +237,13 @@
                         </tr>
                         <tr id="group7">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照核准
+                                &nbsp;[審查] 建照核准
                             </td>
                             <td>
                                 <input type="date" class="startDate" value="2024-10-20" onchange="changefunc(this)"
@@ -222,12 +253,13 @@
                                 <input type="date" class="endDate" value="2024-10-20" onchange="changefunc(this)" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="1"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                    min="1" readonly />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control" type="number" value="7" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -237,25 +269,29 @@
                         </tr>
                         <tr id="group8">
                             <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
                                 <span style="color: rgb(95, 141, 241);">
                                     <i class="fa-solid fa-hourglass-start fa-lg"></i>
                                 </span>
-                                &nbsp;建照領照
+                                &nbsp;[審查] 建照領照
                             </td>
                             <td>
-                                <input type="date" class="startDate" value="2024-10-27" onchange="changefunc(this)"
+                                <input type="date" class="startDate" onchange="changefunc(this)" value="2024-10-27"
                                     disabled />
                             </td>
                             <td>
-                                <input type="date" class="endDate" value="2024-10-27" onchange="changefunc(this)" />
+                                <input type="date" class="endDate" onchange="changefunc(this)" value="2024-10-27" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" style="width: 70px;" value="1"
-                                    onchange="changefunc(this)" min="1" readonly />
+                                <input type="number" class="form-control workday" value="1" onchange="changefunc(this)"
+                                    min="1" readonly />
                             </td>
                             <td>
-                                <input class="form-check-input" type="checkbox" checked />
-                                <input class="form-control" type="number" value="7" style="width: 70px;" />
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" value="7" />
                             </td>
                             <td>
                                 <input type="button" value="備註" class="btn btn-primary" />
@@ -275,18 +311,18 @@
             <div class="card-body">
                 <ul>
                     <li>PM 自行決定該工作是否連動修改</li>
-                    <li>連動規則</li>
-                    <ul>
-                        <li>已完成工作不套用連動規則</li>
-                        <li>前面的工作不套用連動規則(只調整後續工作)</li>
-                    </ul>
                     <li>調整日期規則</li>
                     <ul>
-                        <li>特定審查工作工期只有一天，開始日一定等於結束日</li>
+                        <li>審查工作工期只有一天，開始日一定等於結束日</li>
                         <li>調整開始日期時，自動依工期推算結束日(工期不變)</li>
                         <li>調整結束日期時，開始日不變，自動推算增減工期</li>
                         <li>調整工期時，開始日不變，自動推算結束日</li>
                         <li>調整前項關聯，依關聯日期</li>
+                    </ul>
+                    <li>連動規則</li>
+                    <ul>
+                        <li>已完成工作不套用連動規則</li>
+                        <li>前面的工作不套用連動規則(只調整後續工作)</li>
                     </ul>
                 </ul>
             </div>
@@ -294,7 +330,7 @@
 
     </div>
     <script>
-        let groupcount = document.querySelectorAll('input').length / 8
+        let groupcount = document.querySelectorAll('input').length / 9;
         Date.prototype.addDays = function (days) {
             var date = new Date(this.valueOf());
             date.setDate(date.getDate() + days);
@@ -307,25 +343,21 @@
         function changefunc(sender) {
             let row = sender.closest('tr');
             let inputs = row.querySelectorAll('input');
-            if (sender.attributes.type.nodeValue === 'date') {
-                // 調整日期動作
-                // 檢查開始日等於結束日
-                if (inputs[2].readOnly) {
-                    // 如果工期唯讀，則開始日等於結束日
-                    inputs[0].value = sender.value;
-                } else if (sender.className.includes('startDate')) {
-                    // 調整工期時，開始日不變，自動推算結束日
-                    inputs[1].value = (new Date(inputs[0].valueAsDate)).addDays(inputs[2].valueAsNumber - 1).toISOString().substring(0, 10);
-                } else if (sender.className.includes('endDate')) {
-                    // 計算工期
-                    inputs[2].value = DayDiff(inputs[1].valueAsDate, inputs[0].valueAsDate);
-                } else {
+            if (inputs[3].readOnly) {
+                // 如果工期唯讀，則開始日等於結束日
+                inputs[1].value = sender.value;
+            } else if (sender.className.includes('startDate')) {
+                // 調整開始日時，依工期，推算結束日
+                inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays(inputs[3].valueAsNumber - 1).toISOString().substring(0, 10);
+            } else if (sender.className.includes('endDate')) {
+                // 調整結束日時，開始日不變，推算工期
+                inputs[3].value = DayDiff(inputs[1].valueAsDate, inputs[1].valueAsDate);
+            } else if (sender.className.includes('workday')) {
+                // 調整工期時，開始日不變，推算結束日
+                let dt = new Date(inputs[1].valueAsDate);
+                inputs[2].value = dt.addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
+            } else {
 
-                }
-            } else if (sender.attributes.type.nodeValue === 'number') {
-                // 調整工期動作
-                let dt = new Date(inputs[0].valueAsDate);
-                inputs[1].value = dt.addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
             }
             procMove(sender)
         }
@@ -336,17 +368,18 @@
             let group = parseInt(row.id.substring(5));
             //console.log(' ');
             //console.log('current group: ' + group);
-            // 如果目前組別小於全部組別數，處理移動結束日期
+            // 如果目前組別小於全部組別數，移動後續工作結束日期
             if (group < groupcount) {
                 for (let i = group + 1; i <= groupcount; i++) {
                     //console.log('proc group: ' + (i));
                     let prevGroup = document.getElementById('group' + (i - 1)).querySelectorAll('input');
                     let currentGroup = document.getElementById('group' + i).querySelectorAll('input');
-                    if (currentGroup[3].checked && !currentGroup[1].disabled) {
+                    // 檢查是否啟用關聯，且結束日未停用(結束日停用表示該工作已完成)
+                    if (currentGroup[4].checked && !currentGroup[2].disabled) {
                         //console.log('constraint: ' + currentGroup[3].checked);
                         //console.log('group' + i + ": " + currentGroup[4].value);
-                        currentGroup[1].value = (new Date(prevGroup[1].valueAsDate))
-                            .addDays(currentGroup[4].valueAsNumber)
+                        currentGroup[2].value = (new Date(prevGroup[2].valueAsDate))
+                            .addDays(currentGroup[5].valueAsNumber)
                             .toISOString()
                             .substring(0, 10);
                     }
@@ -356,13 +389,27 @@
             group = 0;
             for (let i = group; i < groupcount; i++) {
                 let currentGroup = document.getElementById('group' + (i + 1)).querySelectorAll('input');
-                currentGroup[0].value = (new Date(currentGroup[1].valueAsDate))
-                    .addDays(currentGroup[2].valueAsNumber * -1 + 1)
+                currentGroup[1].value = (new Date(currentGroup[2].valueAsDate))
+                    .addDays(currentGroup[3].valueAsNumber * -1 + 1)
                     .toISOString()
                     .substring(0, 10);
-                //currentGroup[1].min = currentGroup[0].value
-                //currentGroup[0].max = currentGroup[1].value
             }
+        }
+        function toggleConstraint(sender) {
+            let inputs = sender.closest('tr').querySelectorAll('input');
+            inputs[5].disabled = !sender.checked;
+        }
+        function toggleComplete(sender) {
+            let row = sender.closest('tr');
+            let inputs = row.querySelectorAll('input');
+            inputs[1].disabled = !sender.checked || inputs[3].readOnly;
+            inputs[2].disabled = sender.checked;
+            inputs[3].disabled = sender.checked;
+            inputs[4].disabled = sender.checked;
+            inputs[4].checked = !sender.checked;
+            inputs[5].disabled = sender.checked;
+            inputs[7].style.display = (sender.checked) ? "none" : "inline-block";
+            inputs[8].style.display = (sender.checked) ? "none" : "inline-block";
         }
 
     </script>
