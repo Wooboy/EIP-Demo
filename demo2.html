@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>建照連動修改 demo</title>
+    <script>
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <script href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <style>
+        table {
+            table-layout: fixed;
+        }
+
+        input.workday {
+            width: 70px;
+        }
+
+        input.constraint {
+            width: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                BASIC
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30px">完成</th>
+                            <th width="300px">內容</th>
+                            <th width="160px">開始</th>
+                            <th width="160px">結束</th>
+                            <th width="100px">工期</th>
+                            <th width="100px">前項關聯</th>
+                            <th width="400px">其它</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="group1">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[審查] 建照掛號
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-01-23"
+                                    disabled />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-01-23" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
+                                    min="1" readonly />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" disabled />
+                                <input type="number" class="form-control constraint" disabled />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group2">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[品管] 建照自主檢查表 (法務)
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-08-13" />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-08-22" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group3">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[品管] 建照圖初版提交 (法務)
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-08-28" />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-09-06" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group4">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[品管] 建照圖修正版提交 (法務)
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-09-12" />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-09-21" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group5">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[品管] 建照圖定稿版提交 (法務)
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-09-27" />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-10-06" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="10"
+                                    onchange="changeValue(this)" min="1" />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="15" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group6">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[審查] 建照圖審
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-10-13"
+                                    disabled />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-10-13" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
+                                    min="1" readonly />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group7">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[審查] 建照核准
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-10-20"
+                                    disabled />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-10-20" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
+                                    min="1" readonly />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                        <tr id="group8">
+                            <td>
+                                <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)" />
+                            </td>
+                            <td>
+                                <span style="color: rgb(95, 141, 241);">
+                                    <i class="fa-solid fa-hourglass-start fa-lg"></i>
+                                </span>
+                                &nbsp;[審查] 建照領照
+                            </td>
+                            <td>
+                                <input type="date" class="startDate" onchange="changeValue(this)" value="2024-10-27"
+                                    disabled />
+                            </td>
+                            <td>
+                                <input type="date" class="endDate" onchange="changeValue(this)" value="2024-10-27"
+                                    data-old-date="2024-10-27" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control workday" value="1" onchange="changeValue(this)"
+                                    min="1" readonly />
+                            </td>
+                            <td style="display: flex;">
+                                <input type="checkbox" class="form-check-input" onchange="toggleConstraint(this)"
+                                    checked />
+                                <input type="number" class="form-control constraint" onchange="changeValue(this)"
+                                    value="7" />
+                            </td>
+                            <td>
+                                <input type="button" value="備註" class="btn btn-primary" />
+                                <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
+                                <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
+                                    style="display: none;" />
+                                <input type="button" value="取消工作" class="btn btn-secondary" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-header">
+                限制條件
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>PM 自行決定該工作是否連動修改</li>
+                    <li>調整日期規則</li>
+                    <ul>
+                        <li>審查工作工期只有一天，開始日一定等於結束日</li>
+                        <li>調整開始日期時，自動依工期推算結束日(工期不變)</li>
+                        <li>調整結束日期時，開始日不變，自動推算增減工期</li>
+                        <li>調整工期時，開始日不變，自動推算結束日</li>
+                        <li>調整前項關聯，依關聯日期</li>
+                    </ul>
+                    <li>連動規則</li>
+                    <ul>
+                        <li>已完成工作不套用連動規則</li>
+                        <li>前面的工作不套用連動規則(只調整後續工作)</li>
+                    </ul>
+                    <li>儲存工作規則</li>
+                    <ul>
+                        <li>需要記住原始工作日期，如果工作有異動，則個別執行存檔程序</li>
+                        <li>若審查列為重審項目，需執行重審存檔程序</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        let groupcount = document.querySelectorAll('input').length / 10;
+        Date.prototype.addDays = function (days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        function DayDiff(date1, date2) {
+            let result = (date1 - date2) / 86400000 + 1;
+            return result;
+        }
+        function setComplete(sender) {
+            let row = sender.closest('tr');
+            let inputs = row.querySelectorAll('input');
+            //row.querySelectorAll('span')[0].con
+        }
+        function setUncomplete(sender) {
+
+        }
+
+        // 執行
+        function changeValue(sender) {
+            let row = sender.closest('tr');
+            let inputs = row.querySelectorAll('input');
+            let oldDate = new Date(inputs[2].getAttribute("data-old-date"));
+            // 計算結束日變化量
+            let deltaDays = DayDiff(inputs[2].valueAsDate, oldDate) - 1;
+
+            if (sender.className.includes('startDate')) {
+                // 調整開始日時，依工期，推算結束日
+                inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays(inputs[3].valueAsNumber - 1).toISOString().substring(0, 10);
+            } else if (sender.className.includes('endDate')) {
+                // 調整結束日時，開始日不變，推算工期
+                // 若開始日唯讀，直接套用結束日
+                if (inputs[1].disabled) {
+                    inputs[1].value = inputs[2].value;
+                } else {
+                    inputs[3].value = DayDiff(inputs[2].valueAsDate, inputs[1].valueAsDate);
+                }
+            } else if (sender.className.includes('workday')) {
+                // 調整工期時，開始日不變，推算結束日
+                inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
+            } else if (sender.className.includes('constraint')) {
+                // 調整關聯時，推算結束日
+                console.log('hi');
+                let dt = (document.getElementById('group' + (parseInt(row.id.substring(5)) - 1)).querySelectorAll('input')[2].valueAsDate);
+                inputs[2].value = dt.addDays(parseInt(sender.value)).toISOString().substring(0, 10);
+            } else {
+
+            }
+
+            // 移動後方工作
+            moveConstraint(sender, deltaDays);
+
+            // 更新暫存結束日
+            updateOldDate();
+
+            // 更新前項關聯
+            calcContraintDay();
+        }
+
+        function moveConstraint(sender, deltaDays) {
+            let row = sender.closest('tr');
+            let group = parseInt(row.id.substring(5));
+            // 如果目前組別小於全部組別數，移動後續工作結束日期
+            if (group < groupcount) {
+                for (let i = group + 1; i <= groupcount; i++) {
+                    let currentGroup = document.getElementById('group' + i).querySelectorAll('input');
+                    // 工作未完成且啟用關聯時才推算工作
+                    if (!currentGroup[0].checked && currentGroup[4].checked) {
+                        currentGroup[2].value = (new Date(currentGroup[2].getAttribute("data-old-date"))).addDays(deltaDays).toISOString().substring(0, 10);
+                        // 依工期推算開始日
+                        currentGroup[1].value = currentGroup[2].valueAsDate.addDays(currentGroup[3].valueAsNumber * -1 + 1).toISOString().substring(0, 10);
+                    }
+                }
+            }
+        }
+        function updateOldDate() {
+            for (let i = 0; i < groupcount; i++) {
+                let currentGroup = document.getElementById('group' + (i + 1)).querySelectorAll('input');
+                currentGroup[2].setAttribute("data-old-date", currentGroup[2].value);
+            }
+        }
+
+        function calcContraintDay() {
+            for (let i = 1; i < groupcount; i++) {
+                let prevGroup = document.getElementById('group' + i).querySelectorAll('input');
+                let currentGroup = document.getElementById('group' + (i + 1)).querySelectorAll('input');
+                currentGroup[5].value = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate) - 1);
+            }
+        }
+        function toggleConstraint(sender) {
+            let inputs = sender.closest('tr').querySelectorAll('input');
+            inputs[5].disabled = !sender.checked;
+        }
+        function toggleComplete(sender) {
+            let row = sender.closest('tr');
+            let inputs = row.querySelectorAll('input');
+            inputs[1].disabled = sender.checked || inputs[3].readOnly;
+            inputs[2].disabled = sender.checked;
+            inputs[3].disabled = sender.checked;
+            // 第一項工作不可設定前項關聯
+            if (row.id !== 'group1') {
+                inputs[4].disabled = sender.checked;
+                inputs[4].checked = !sender.checked;
+                inputs[5].disabled = sender.checked;
+            }
+            inputs[7].style.display = (sender.checked) ? "none" : "inline-block";
+            inputs[8].style.display = (sender.checked) ? "none" : "inline-block";
+        }
+        // 進入畫面時，強制檢查一次關聯日期
+        calcContraintDay();
+        updateOldDate();
+
+    </script>
+</body>
+
+</html>
