@@ -337,12 +337,17 @@
                         <li>調整開始日期時，自動依工期推算結束日(工期不變)</li>
                         <li>調整結束日期時，開始日不變，自動推算增減工期</li>
                         <li>調整工期時，開始日不變，自動推算結束日</li>
-                        <li>調整前項關聯，依關聯日期</li>
+                        <li>調整前項關聯，依關聯日期調整結束日，</li>
                     </ul>
                     <li>連動規則</li>
                     <ul>
                         <li>已完成工作不套用連動規則</li>
                         <li>前面的工作不套用連動規則(只調整後續工作)</li>
+                        <li>未啟用前項關聯的項目，不套用連動規則</li>
+                    </ul>
+                    <li>關聯關係檢查</li>
+                    <ul>
+                        <li></li>
                     </ul>
                     <li>儲存工作規則</li>
                     <ul>
@@ -368,10 +373,15 @@
         function setComplete(sender) {
             let row = sender.closest('tr');
             let inputs = row.querySelectorAll('input');
-            //row.querySelectorAll('span')[0].con
+            inputs[0].checked = 1;
+            toggleComplete(inputs[0]);
+
         }
         function setUncomplete(sender) {
-
+            let row = sender.closest('tr');
+            let inputs = row.querySelectorAll('input');
+            inputs[0].checked = 0;
+            toggleComplete(inputs[0]);
         }
 
         // 執行
@@ -428,6 +438,8 @@
                         // 依工期推算開始日
                         currentGroup[1].value = currentGroup[2].valueAsDate.addDays(currentGroup[3].valueAsNumber * -1 + 1).toISOString().substring(0, 10);
                     }
+                    // 如果該列前項關聯為負數，則亮顯
+                    
                 }
             }
         }
@@ -462,7 +474,8 @@
                 inputs[5].disabled = sender.checked;
             }
             inputs[7].style.display = (sender.checked) ? "none" : "inline-block";
-            inputs[8].style.display = (sender.checked) ? "none" : "inline-block";
+            inputs[8].style.display = !(sender.checked) ? "none" : "inline-block";
+            inputs[9].style.display = (sender.checked) ? "none" : "inline-block";
         }
         // 進入畫面時，強制檢查一次關聯日期
         calcContraintDay();
