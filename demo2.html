@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>建照連動修改 demo2</title>
+    <title>建照連動修改 demo</title>
     <script>
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -407,7 +407,6 @@
             } else if (sender.className.includes('constraint')) {
                 // 調整關聯時，推算結束日
                 console.log('調整關聯');
-                console.log('hi');
                 let dt = (document.getElementById('group' + (parseInt(row.id.substring(5)) - 1)).querySelectorAll('input')[2].valueAsDate);
                 inputs[2].value = dt.addDays(parseInt(sender.value)).toISOString().substring(0, 10);
             } else {
@@ -458,15 +457,12 @@
                 let currentGroup = currentRow.querySelectorAll('input');
                 let tmp = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate) - 1)
                 currentGroup[5].value = tmp;
-                console.log(currentGroup[5].value);
                 // 如果該列前項關聯為負數，則亮顯
-                /*
-                if (currentGroup[5].valueAsNumber < 0) {
-                    currentRowTd.style.backgroundColor = "red";
+                if (tmp < 0) {
+                    currentGroup[5].style.backgroundColor = "red";
                 } else {
-                    currentRowTd.style.backgroundColor = "white";
+                    currentGroup[5].style.backgroundColor = null;
                 }
-                */
             }
         }
         function toggleConstraint(sender) {
@@ -487,7 +483,6 @@
             }
             inputs[7].style.display = (sender.checked) ? "none" : "inline-block";
             inputs[8].style.display = !(sender.checked) ? "none" : "inline-block";
-            inputs[9].style.display = (sender.checked) ? "none" : "inline-block";
         }
         // 進入畫面時，強制檢查一次關聯日期
         calcContraintDay();
