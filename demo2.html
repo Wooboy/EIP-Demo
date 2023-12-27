@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>建照連動修改 demo</title>
+    <title>建照連動修改 demo2</title>
     <script>
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                BASIC
+                建照審查 DEMO2
             </div>
             <div class="card-body">
                 <table class="table">
@@ -74,7 +74,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group2">
@@ -108,7 +107,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group3">
@@ -142,7 +140,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group4">
@@ -176,7 +173,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group5">
@@ -210,7 +206,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group6">
@@ -245,7 +240,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group7">
@@ -280,7 +274,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                         <tr id="group8">
@@ -316,7 +309,6 @@
                                 <input type="button" value="完成工作" class="btn btn-success" onclick="setComplete(this)" />
                                 <input type="button" value="取消完成" class="btn btn-success" onclick="setUncomplete(this)"
                                     style="display: none;" />
-                                <input type="button" value="取消工作" class="btn btn-secondary" />
                             </td>
                         </tr>
                     </tbody>
@@ -360,7 +352,7 @@
 
     </div>
     <script>
-        let groupcount = document.querySelectorAll('input').length / 10;
+        let groupcount = document.querySelectorAll('input').length / 9;
         Date.prototype.addDays = function (days) {
             var date = new Date(this.valueOf());
             date.setDate(date.getDate() + days);
@@ -389,31 +381,40 @@
             let row = sender.closest('tr');
             let inputs = row.querySelectorAll('input');
             let oldDate = new Date(inputs[2].getAttribute("data-old-date"));
-            // 計算結束日變化量
-            let deltaDays = DayDiff(inputs[2].valueAsDate, oldDate) - 1;
 
             if (sender.className.includes('startDate')) {
                 // 調整開始日時，依工期，推算結束日
+                console.log('調整開始日時');
                 inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays(inputs[3].valueAsNumber - 1).toISOString().substring(0, 10);
             } else if (sender.className.includes('endDate')) {
                 // 調整結束日時，開始日不變，推算工期
+                console.log('調整結束日');
                 // 若開始日唯讀，直接套用結束日
                 if (inputs[1].disabled) {
                     inputs[1].value = inputs[2].value;
                 } else {
-                    inputs[3].value = DayDiff(inputs[2].valueAsDate, inputs[1].valueAsDate);
+                    let value = DayDiff(inputs[2].valueAsDate, inputs[1].valueAsDate);
+                    if(value < 1){
+                        inputs[2].value = inputs[2].getAttribute('data-old-date');
+                    }else{
+                        inputs[3].value = value
+                    }
                 }
             } else if (sender.className.includes('workday')) {
                 // 調整工期時，開始日不變，推算結束日
+                console.log('調整工期');
                 inputs[2].value = (new Date(inputs[1].valueAsDate)).addDays((sender.valueAsNumber - 1)).toISOString().substring(0, 10);
             } else if (sender.className.includes('constraint')) {
                 // 調整關聯時，推算結束日
+                console.log('調整關聯');
                 console.log('hi');
                 let dt = (document.getElementById('group' + (parseInt(row.id.substring(5)) - 1)).querySelectorAll('input')[2].valueAsDate);
                 inputs[2].value = dt.addDays(parseInt(sender.value)).toISOString().substring(0, 10);
             } else {
 
             }
+            // 計算結束日變化量
+            let deltaDays = DayDiff(inputs[2].valueAsDate, oldDate) - 1;
 
             // 移動後方工作
             moveConstraint(sender, deltaDays);
@@ -431,15 +432,14 @@
             // 如果目前組別小於全部組別數，移動後續工作結束日期
             if (group < groupcount) {
                 for (let i = group + 1; i <= groupcount; i++) {
-                    let currentGroup = document.getElementById('group' + i).querySelectorAll('input');
+                    let currentRow = document.getElementById('group' + i);
+                    let currentGroup = currentRow.querySelectorAll('input');
                     // 工作未完成且啟用關聯時才推算工作
                     if (!currentGroup[0].checked && currentGroup[4].checked) {
                         currentGroup[2].value = (new Date(currentGroup[2].getAttribute("data-old-date"))).addDays(deltaDays).toISOString().substring(0, 10);
                         // 依工期推算開始日
                         currentGroup[1].value = currentGroup[2].valueAsDate.addDays(currentGroup[3].valueAsNumber * -1 + 1).toISOString().substring(0, 10);
                     }
-                    // 如果該列前項關聯為負數，則亮顯
-                    
                 }
             }
         }
@@ -453,8 +453,20 @@
         function calcContraintDay() {
             for (let i = 1; i < groupcount; i++) {
                 let prevGroup = document.getElementById('group' + i).querySelectorAll('input');
-                let currentGroup = document.getElementById('group' + (i + 1)).querySelectorAll('input');
-                currentGroup[5].value = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate) - 1);
+                let currentRow = document.getElementById('group' + (i + 1));
+                let currentRowTd = document.querySelectorAll('tr');
+                let currentGroup = currentRow.querySelectorAll('input');
+                let tmp = (DayDiff(currentGroup[2].valueAsDate, prevGroup[2].valueAsDate) - 1)
+                currentGroup[5].value = tmp;
+                console.log(currentGroup[5].value);
+                // 如果該列前項關聯為負數，則亮顯
+                /*
+                if (currentGroup[5].valueAsNumber < 0) {
+                    currentRowTd.style.backgroundColor = "red";
+                } else {
+                    currentRowTd.style.backgroundColor = "white";
+                }
+                */
             }
         }
         function toggleConstraint(sender) {
